@@ -1,4 +1,5 @@
 
+import { useState } from 'react'
 import './App.css'
 
 // l'interpolation
@@ -45,6 +46,11 @@ function App() {
     <ul>
       {fruits.map(elmtFruit =>  (<li key={elmtFruit}> {elmtFruit} </li>))}
     </ul>
+
+    {/* compteur de nombres */}
+     <Compteur color= 'green'/>
+      {/* compteur d'age */}
+     <Age color= 'green'/>
   </div> 
 }
 
@@ -53,4 +59,38 @@ function TitreDav ({color}) {
   return <h5 style={{color : color}}>affichage du titre pour l'appeler dans la fonction principale</h5>
 }
 
+function Compteur () {
+
+  // tableau a deux element avec la valeur initiale
+  const [count, setCount] = useState (0)
+// fonction pour compter les nombres
+  const increment = () => {
+    setCount(count + 1)
+  }
+
+  return  <>  
+  <p>Compteur: {count}</p>
+  <button onClick={increment}>Incrementer</button>
+   </> 
+}
+
+function Age () { 
+
+  // tableau a deux element avec l'initial un objet
+  const [person, setPerson] = useState ({
+    prenom: 'David',
+    nom: 'ALAWI',
+    age: 23
+  })
+// fonction pour ajouter l'age
+  const increment = () => {
+    // parcours tous les elements de la personne et change le valeur de l'age en faisant + 1
+    setPerson({...person, age: person.age + 1})
+  }
+
+  return  <>  
+  <p>Age de {person.prenom}: {person.age}</p>
+  <button onClick={increment}>Gagner une année</button>
+   </> 
+}
 export default App
